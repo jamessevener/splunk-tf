@@ -1,0 +1,16 @@
+# Local .terraform dirs
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Backup files
+*.bak
+*.backup
+
+# Ignore Mac .DS_Store files
+.DS_Store
+
+# Ignored vscode files
+.vscode/
