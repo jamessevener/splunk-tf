@@ -32,3 +32,7 @@ variable "volume_size" {
 variable "volume_type" {
         default = "gp3"
 }
+
+variable "instance_addr" {
+        default = ""
+}
