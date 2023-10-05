@@ -6,14 +6,6 @@ terraform {
     }
   }
 }
-
-provider "splunk" {
-  url                  = "${modeule.ec2.instance_addr}"
-  username             = "admin"
-  password             = "SPLUNK-i-0d68b328747101671"
-  insecure_skip_verify = true
-}
-
 resource "splunk_authentication_users" "user01" {
   name              = "user01"
   email             = "user01@example.com"

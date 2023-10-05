@@ -10,17 +10,10 @@ resource "aws_instance" "splunk_server" {
         volume_size = "${var.volume_size}"
     }
 
-    provisioner "file" {
-        source = "web.conf"
-        destination = "/opt/splunk/etc/system/local/web.conf"
-    }
-
-    connection {
-        type = "ssh"
-        host = self.public_ip
-        user = "ec2-user"
-        private_key = file("/home/jsevener/.ssh/splunk/Sevener.pem")
-        timeout = "4m"
-
-    }
+    user_data = <<-EOF
+    #!/bin/bash
+    mkdir -p /opt/splunk/etc/system/local
+    echo 'echo -e "[settings]\n mgmtHostPort = 0.0.0.0:8089\n [settings]\n httpport = 8000\n enableSplunkWebSSL = true\n" > /opt/splunk/etc/system/local/web.conf' | at now +3 minutes
+    echo 'echo "/opt/splunk/bin/splunk restart"' | at now +9 minutes
+    EOF
 }

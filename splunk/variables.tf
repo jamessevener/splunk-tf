@@ -1,3 +1,4 @@
-variable "instance_addr" {
+variable "url" {
     default =""
+    type = string
 }
