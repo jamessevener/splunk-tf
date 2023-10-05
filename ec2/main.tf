@@ -9,4 +9,18 @@ resource "aws_instance" "splunk_server" {
         volume_type = "${var.volume_type}"
         volume_size = "${var.volume_size}"
     }
-} 
+
+    provisioner "file" {
+        source = "web.conf"
+        destination = "/opt/splunk/etc/system/local/web.conf"
+    }
+
+    connection {
+        type = "ssh"
+        host = self.public_ip
+        user = "ec2-user"
+        private_key = file("/home/jsevener/.ssh/splunk/Sevener.pem")
+        timeout = "4m"
+
+    }
+}
